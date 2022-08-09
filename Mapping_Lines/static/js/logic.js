@@ -25,4 +25,8 @@ L.circle([34.0522, -118.2437], {
 
  L.circleMarker([34.0522, -118.2437]).addTo(map);
 
- 
+// Coordinates for each point to be used in the line.
+let line = [
+    [33.9416, -118.4085],
+    [37.6213, -122.3790]
+  ];

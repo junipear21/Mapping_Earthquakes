@@ -14,7 +14,6 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
     maxZoom: 18,
     accessToken: API_KEY
 });
-
 // Create a base layer that holds both maps.
 let baseMaps = {
     Street: light,
@@ -23,8 +22,8 @@ let baseMaps = {
   
 // Create the map object with center, zoom level and default layer.
 let map = L.map('mapid', {
-    center: [44.0, -80.0],
-    zoom: 2,
+    center: [43.7, -79.3],
+    zoom: 11,
     layers: [light]
 })
 
@@ -34,25 +33,12 @@ L.control.layers(baseMaps).addTo(map);
 // Then we add our 'graymap' tile layer to the map.
 light.addTo(map);
 
-// Accessing the Toronto airline routes GeoJSON URL.
-let torontoData = "https://raw.githubusercontent.com/Junipear21/Mapping_Earthquakes/main/torontoRoutes.json";
+// Accessing the Toronto neighborhoods GeoJSON URL.
+let torontoHoods = "https://raw.githubusercontent.com/Junipear21/Mapping_Earthquakes/main/torontoNeighborhoods.json";
 
 // Grabbing our GeoJSON data.
-d3.json(torontoData).then(function(data) {
-    console.log(data);
+d3.json(torontoHoods).then(function(data) {
+  console.log(data);
   // Creating a GeoJSON layer with the retrieved data.
-  L.geoJSON(data, {
-    style: myStyle,
-    onEachFeature: function(feature, layer) {
-      layer.bindPopup('<h3> Airline: ' + feature.properties.airline + "</h3> <hr><h3> Destination: "
-      + feature.properties.dst + "</h3>");
-    }
-  })
-  .addTo(map);
-});
-
-// Create a style for the lines.
-let myStyle = {
-  color: "#ffffa1",
-  weight: 2
-}
+  L.geoJSON(data).addTo(map);
+  });
